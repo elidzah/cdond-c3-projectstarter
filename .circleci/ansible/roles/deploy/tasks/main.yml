@@ -1,0 +1,44 @@
+---
+# Compress backend
+# copy backend
+# uncompress backend....
+- name: "Installing Rsync"
+  become: true
+  connection: local
+  package:
+    name: ["rsync"]
+    state: latest
+
+- name: Synchronize and delete files in dest on the remote host that are not found in src of localhost.
+  ansible.posix.synchronize:
+    src: /home/circleci/project/backend
+    dest: /home/ubuntu
+    delete: yes
+    recursive: yes
+
+# - name: copy environment variable script
+#   become: true
+#   copy:
+#     src: dbcontext.sh
+#     dest: /etc/profile.d/dbcontext.sh
+
+# - name: modify environment variable
+#   become: true
+#   blockinfile:
+#     path: /etc/profile.d/dbcontext.sh
+#     block: |
+#       export ENVIRONMENT='production'
+#       export TYPEORM_CONNECTION="{{ conn }}"
+#       export TYPEORM_ENTITIES='{{ entities }}'
+#       export TYPEORM_HOST='{{ dbhost }}'
+#       export TYPEORM_PORT='{{ dbport }}'
+#       export TYPEORM_USERNAME='{{ dbuser }}'
+#       export TYPEORM_PASSWORD='{{ dbpwd }}'
+#       export TYPEORM_DATABASE='{{ database }}'
+
+- name: Starting the backend
+  shell: |
+    pwd
+    ls -lart
+    cd /home/ubuntu/backend/dist
+    pm2 start npm -- run start
