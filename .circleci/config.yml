@@ -598,6 +598,7 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
+      - install-dependencies-awscli
       - attach_workspace:
           at: .
       - run:
