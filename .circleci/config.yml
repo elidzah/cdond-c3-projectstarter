@@ -44,7 +44,7 @@ orbs:
 
 commands:
   destroy-environment-onfail:
-    description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
+    description: Destroy back-end and front-end cloudformation stacks given a workflowID.
     parameters:
       # Add parameter here
       cfname:
