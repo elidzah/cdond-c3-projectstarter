@@ -604,7 +604,7 @@ jobs:
           name: Get old stack workflow id
           command: |
             # your code here
-            export OldWorkflowID=$(tail - .circleci/oldworkflowid.txt)
+            export OldWorkflowID=$(tail -1 .circleci/oldworkflowid.txt)
 
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --stack-status-filter CREATE_COMPLETE --output text))
             echo "Old WorkflowID: ${OldWorkflowID}"
@@ -614,6 +614,7 @@ jobs:
           command: |
             if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
+              echo "BUCKET TO REMOVE ## s3://udapeople-${OldWorkflowID}"
               aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
               aws cloudformation delete-stack --stack-name "be-stack-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "fe-stack-${OldWorkflowID}"
