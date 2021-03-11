@@ -51,4 +51,6 @@ Resources:
       ImageId: ami-055958ae2f796344b
       Tags:
         - Key: Name
-          Value: !Sub backend-${ID} - Prometheus Node Exporter
+          Value: !Sub backend-${ID}
+        - Key: Monitor
+          Value: Prometheus Node Exporter
