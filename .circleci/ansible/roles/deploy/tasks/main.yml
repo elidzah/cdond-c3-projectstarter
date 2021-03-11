@@ -1,7 +1,4 @@
 ---
-# Compress backend
-# copy backend
-# uncompress backend....
 - name: "Installing Rsync"
   become: true
   connection: local
