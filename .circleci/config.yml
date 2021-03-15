@@ -288,6 +288,7 @@ jobs:
           command: |
             cd frontend
             npm audit fix --audit-level=critical --force
+            pm update kind-of --depth 20
             npm audit --audit-level=critical
 #norollback
   scan-backend:
@@ -306,6 +307,8 @@ jobs:
           command: |
             cd backend
             npm audit fix --audit-level=critical --force
+            npm install --save-dev webpack@5.26.0
+            npm update kind-of --depth 20
             npm audit --audit-level=critical
       - slack/notify:
           event: fail
