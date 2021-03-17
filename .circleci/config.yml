@@ -306,7 +306,6 @@ jobs:
           name: Backend SCAN
           command: |
             cd backend
-            npm install --save-dev nodemon@2.0.7 ts-jest@26.5.3 jest@26.6.3 @nestjs/common@7.6.14 standard-version@9.1.1 @nestjs/swagger@4.7.16
             npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
       - slack/notify:
@@ -314,6 +313,7 @@ jobs:
           mentions: '@DevOps-team'
           template: basic_fail_1
 
+            # npm install --save-dev nodemon@2.0.7 ts-jest@26.5.3 jest@26.6.3 @nestjs/common@7.6.14 standard-version@9.1.1 @nestjs/swagger@4.7.16
 # with rollback - amazon/aws-cli with persistance
   deploy-infrastructure:
     docker:
